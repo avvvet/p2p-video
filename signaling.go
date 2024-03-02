@@ -16,6 +16,17 @@ func handleWebSocket(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	defer conn.Close()
+
+	/* lets continuesly handle websocket message */
+	for {
+		_, message, err := conn.ReadMessage()
+		if err != nil {
+			log.Println("Websocket read error:", err)
+			break
+		}
+
+		log.Println(message)
+	}
 }
 
 func main() {
