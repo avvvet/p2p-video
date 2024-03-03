@@ -25,10 +25,12 @@ func handleWebSocket(w http.ResponseWriter, r *http.Request) {
 			break
 		}
 
-		log.Println(message)
+		log.Println(string(message))
 	}
 }
 
 func main() {
 	http.HandleFunc("/ws", handleWebSocket)
+	log.Println("Signaling server listening...")
+	log.Fatal(http.ListenAndServe(":30001", nil))
 }
